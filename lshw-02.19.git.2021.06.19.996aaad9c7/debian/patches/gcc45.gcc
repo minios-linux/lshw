@@ -1,0 +1,233 @@
+Include headers to build under gcc-4.3Index: lshw-02.14/src/core/cdrom.cc
+===================================================================
+Index: lshw/src/core/cdrom.cc
+===================================================================
+--- lshw.orig/src/core/cdrom.cc
++++ lshw/src/core/cdrom.cc
+@@ -25,6 +25,7 @@
+ #include <unistd.h>
+ #include <limits.h>
+ #include <linux/cdrom.h>
++#include <climits>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/cpuid.cc
+===================================================================
+--- lshw.orig/src/core/cpuid.cc
++++ lshw/src/core/cpuid.cc
+@@ -7,6 +7,7 @@
+ #include <fcntl.h>
+ #include <sys/stat.h>
+ #include <sys/time.h>
++#include <cstring>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/cpuinfo.cc
+===================================================================
+--- lshw.orig/src/core/cpuinfo.cc
++++ lshw/src/core/cpuinfo.cc
+@@ -5,6 +5,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <unistd.h>
++#include <stdlib.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <vector>
+Index: lshw/src/core/fb.cc
+===================================================================
+--- lshw.orig/src/core/fb.cc
++++ lshw/src/core/fb.cc
+@@ -14,6 +14,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <errno.h>
++#include <cstring>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/hw.cc
+===================================================================
+--- lshw.orig/src/core/hw.cc
++++ lshw/src/core/hw.cc
+@@ -19,6 +19,9 @@
+ #include <unistd.h>
+ #include <limits.h>
+ #include <sys/utsname.h>
++#include <string.h>
++#include <limits.h>
++#include <cstring>
+ 
+ using namespace hw;
+ 
+Index: lshw/src/core/ideraid.cc
+===================================================================
+--- lshw.orig/src/core/ideraid.cc
++++ lshw/src/core/ideraid.cc
+@@ -20,6 +20,7 @@
+ #include <string.h>
+ #include <dirent.h>
+ #include <ctype.h>
++#include <cstring>
+ #include <vector>
+ #include <linux/hdreg.h>
+ #include <regex.h>
+Index: lshw/src/core/mounts.cc
+===================================================================
+--- lshw.orig/src/core/mounts.cc
++++ lshw/src/core/mounts.cc
+@@ -14,7 +14,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
+-
++#include <cstdlib>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/osutils.cc
+===================================================================
+--- lshw.orig/src/core/osutils.cc
++++ lshw/src/core/osutils.cc
+@@ -3,6 +3,7 @@
+ #include <sstream>
+ #include <iomanip>
+ #include <stack>
++#include <cstring>
+ #include <fcntl.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+Index: lshw/src/core/partitions.cc
+===================================================================
+--- lshw.orig/src/core/partitions.cc
++++ lshw/src/core/partitions.cc
+@@ -21,6 +21,8 @@
+ #include "volumes.h"
+ #include "osutils.h"
+ #include <stdio.h>
++#include <stdlib.h>
++#include <cstring>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+Index: lshw/src/core/pci.cc
+===================================================================
+--- lshw.orig/src/core/pci.cc
++++ lshw/src/core/pci.cc
+@@ -14,6 +14,8 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include <dirent.h>
++#include <stdlib.h>
++#include <cstring>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/pcmcia-legacy.cc
+===================================================================
+--- lshw.orig/src/core/pcmcia-legacy.cc
++++ lshw/src/core/pcmcia-legacy.cc
+@@ -9,6 +9,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <errno.h>
++#include <cstring>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/pcmcia.cc
+===================================================================
+--- lshw.orig/src/core/pcmcia.cc
++++ lshw/src/core/pcmcia.cc
+@@ -6,6 +6,8 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <unistd.h>
++#include <cstdlib>
++#include <cstring>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+Index: lshw/src/core/smp.cc
+===================================================================
+--- lshw.orig/src/core/smp.cc
++++ lshw/src/core/smp.cc
+@@ -11,6 +11,7 @@
+ #include <fcntl.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <cstring>
+ 
+ #include "osutils.h"
+ 
+Index: lshw/src/core/spd.cc
+===================================================================
+--- lshw.orig/src/core/spd.cc
++++ lshw/src/core/spd.cc
+@@ -9,6 +9,7 @@
+ #include <string>
+ #include <dirent.h>
+ #include <stdio.h>
++#include <cstring>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/core/usb.cc
+===================================================================
+--- lshw.orig/src/core/usb.cc
++++ lshw/src/core/usb.cc
+@@ -14,6 +14,7 @@
+ #include "heuristics.h"
+ #include "options.h"
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <map>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+@@ -24,6 +25,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <dirent.h>
++#include <cstring>
+ 
+ #define PROCBUSUSBDEVICES "/proc/bus/usb/devices"
+ #define SYSKERNELDEBUGUSBDEVICES "/sys/kernel/debug/usb/devices"
+Index: lshw/src/core/volumes.cc
+===================================================================
+--- lshw.orig/src/core/volumes.cc
++++ lshw/src/core/volumes.cc
+@@ -22,6 +22,7 @@
+ #include <unistd.h>
+ #include <stdint.h>
+ #include <time.h>
++#include <cstring>
+ 
+ __ID("@(#) $Id$");
+ 
+Index: lshw/src/gui/engine.cc
+===================================================================
+--- lshw.orig/src/gui/engine.cc
++++ lshw/src/gui/engine.cc
+@@ -6,6 +6,8 @@
+ #include "osutils.h"
+ #include "options.h"
+ 
++#include <cstring>
++#include <cstdlib>
+ #include <iostream>
+ #include <fstream>
+ #include <sys/utsname.h>
+Index: lshw/src/gui/print-gui.cc
+===================================================================
+--- lshw.orig/src/gui/print-gui.cc
++++ lshw/src/gui/print-gui.cc
+@@ -10,6 +10,7 @@
+ #include "version.h"
+ #include "osutils.h"
+ #include "stock.h"
++#include <cstring>
+ #include <sstream>
+ #include <iomanip>
+ #include <unistd.h>

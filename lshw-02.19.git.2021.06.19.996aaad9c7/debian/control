@@ -1,0 +1,49 @@
+Source: lshw
+Section: utils
+Priority: optional
+Maintainer: Ghe Rivero <ghe@debian.org>
+Uploaders: Thomas Goirand <zigo@debian.org>
+Build-Depends:
+ debhelper-compat (= 10),
+ libgtk-3-dev,
+ libsqlite3-dev,
+Standards-Version: 3.9.4
+Homepage: https://github.com/lyonel/lshw
+Vcs-Browser: https://salsa.debian.org/openstack-team/third-party/lshw
+Vcs-Git: https://salsa.debian.org/openstack-team/third-party/lshw.git
+
+Package: lshw
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Recommends:
+ pci.ids,
+ usb.ids,
+Description: information about hardware configuration
+ A small tool to provide detailed information on the hardware
+ configuration of the machine. It can report exact memory
+ configuration, firmware version, mainboard configuration, CPU version
+ and speed, cache configuration, bus speed, etc. on DMI-capable x86
+ systems, on some PowerPC machines (PowerMac G4 is known to work) and AMD64.
+ .
+ Information can be output in plain text, HTML or XML.
+
+Package: lshw-gtk
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ polkitd | policykit-1,
+ pkexec | policykit-1,
+Recommends:
+ pciutils,
+ usbutils,
+Description: graphical information about hardware configuration
+ A small tool to provide detailed information on the hardware
+ configuration of the machine. It can report exact memory
+ configuration, firmware version, mainboard configuration, CPU version
+ and speed, cache configuration, bus speed, etc. on DMI-capable x86
+ systems, on some PowerPC machines (PowerMac G4 is known to work) and AMD64.
+ .
+ This package provides lshw-gtk (the GTK+ version)

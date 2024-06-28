@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Application
+Name=Hardware Lister
+Name[de]=Hardware-Lister
+Name[es]=Listar equipamiento
+Name[fr]=Lister le matériel
+Name[it]=Elenca l'hardware
+Name[pt]=Listar equipamento
+Name[ru]=Список оборудования
+Comment=Provides information on hardware
+Comment[de]=Bietet Informationen zur Hardware
+Comment[es]=Ofrece información sobre el equipamiento instalado
+Comment[fr]=Fournit des informations sur le matériel
+Comment[it]=Fornisce informazioni sull'hardware
+Comment[pt]=Fornece informações sobre o hardware
+Comment[ru]=Предоставляет информацию об оборудовании
+Icon=lshw-gtk
+Exec=pkexec lshw-gtk
+Terminal=false
+Categories=System;

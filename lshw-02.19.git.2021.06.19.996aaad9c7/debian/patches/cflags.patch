@@ -1,0 +1,52 @@
+Description: Fix Makefiles cflags
+Author: Thomas Goirand <zigo@debian.org>
+Forwarded: no
+Last-Update: 2018-07-12
+
+Index: lshw/src/Makefile
+===================================================================
+--- lshw.orig/src/Makefile
++++ lshw/src/Makefile
+@@ -23,14 +23,14 @@ export ZLIB
+ CXX?=$(CROSS_COMPILE)c++
+ INCLUDES=-I./core/
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\" -DVERSION=\"$(VERSION)\"
+-CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ ifeq ($(SQLITE), 1)
+ 	CXXFLAGS+= -DSQLITE $(shell pkg-config --cflags sqlite3)
+ endif
+ ifeq ($(ZLIB), 1)
+ 	CXXFLAGS+= -DZLIB $(shell pkg-config --cflags zlib)
+ endif
+-LDFLAGS+=-L./core/ -g
++LDFLAGS+=-L./core/
+ ifneq ($(shell $(LD) --help 2| grep -- --as-needed), )
+ 	LDFLAGS+= -Wl,--as-needed
+ endif
+Index: lshw/src/core/Makefile
+===================================================================
+--- lshw.orig/src/core/Makefile
++++ lshw/src/core/Makefile
+@@ -3,7 +3,7 @@ PACKAGENAME?=lshw
+ CXX?=$(CROSS_COMPILE)c++
+ INCLUDES=
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
+-CXXFLAGS?=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++CXXFLAGS?=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ LDFLAGS=
+ LDSTATIC=
+ LIBS=
+Index: lshw/src/gui/Makefile
+===================================================================
+--- lshw.orig/src/gui/Makefile
++++ lshw/src/gui/Makefile
+@@ -8,7 +8,7 @@ OBJCOPY?=objcopy
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
+ GTKINCLUDES=$(shell pkg-config gtk+-3.0 --cflags)
+ INCLUDES=-I../core $(GTKINCLUDES)
+-CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ ifeq ($(SQLITE), 1)
+ 	CXXFLAGS+= -DSQLITE $(shell pkg-config --cflags sqlite3)
+ endif

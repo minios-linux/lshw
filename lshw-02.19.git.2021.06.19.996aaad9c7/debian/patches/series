@@ -1,0 +1,12 @@
+wget.patch
+bin.patch
+lshw-gtk.patch
+lshw-common.patch
+cflags.patch
+gcc45.gcc
+lshw-X.patch
+privacy.patch
+spelling-error.patch
+add-missing-ethlink-standards.patch
+cross.patch
+#revert-Fix_JSON_output_format.patch

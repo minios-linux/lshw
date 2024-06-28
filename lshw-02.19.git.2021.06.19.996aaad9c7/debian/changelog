@@ -1,0 +1,409 @@
+lshw (02.19.git.2021.06.19.996aaad9c7-2+mos1) unstable; urgency=medium
+
+  * Replaced the use of su-to-root with pkexec.
+
+ -- crims0n <crims0n@minios.dev>  Fri, 28 Jun 2024 00:05:28 +0300
+
+lshw (02.19.git.2021.06.19.996aaad9c7-2) unstable; urgency=medium
+
+  * ACK 02.18.85-0.6 and 02.18.85-0.7 upload and apply the changes that were
+    not there in previous upload (Closes: #995970). The upstream backported
+    patch 0001-fix-755-handle-invalid-FAT.patch is now applied upstream and
+    therefore, removed from d/patches.
+
+ -- Thomas Goirand <zigo@debian.org>  Sat, 09 Oct 2021 16:13:40 +0200
+
+lshw (02.19.git.2021.06.19.996aaad9c7-1) unstable; urgency=medium
+
+  * New upstream release (based on last Git commit).
+  * Add myself as uploader, as I've been working on this package for a while
+    without anyone else contributing.
+  * Refreshed / rebased patches.
+  * Replaced libgtk2.0-dev by libgtk-3-dev in build-depends.
+
+ -- Thomas Goirand <zigo@debian.org>  Tue, 05 Oct 2021 09:15:59 +0200
+
+lshw (02.18.85-0.7) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Backport upstream fix for floating point exception on invalid FAT,
+    thanks to Dave Gomboc and Bernhard Übelacker. (Closes: #946940)
+
+ -- Adrian Bunk <bunk@debian.org>  Sat, 17 Jul 2021 20:19:28 +0300
+
+lshw (02.18.85-0.6) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Switch Recommends from pciutils/usbutils to pci.ids/usb.ids (Closes:
+    #944503).
+
+ -- Aurelien Jarno <aurel32@debian.org>  Sun, 03 Jan 2021 22:41:23 +0000
+
+lshw (02.18.85-0.5) unstable; urgency=medium
+
+  * Desactivate revert-Fix_JSON_output_format.patch: it's making things worse.
+
+ -- Thomas Goirand <zigo@debian.org>  Sun, 26 Apr 2020 13:43:52 +0200
+
+lshw (02.18.85-0.4) unstable; urgency=medium
+
+  * Switch to debhelper-compat (= 10).
+  * Add revert-Fix_JSON_output_format.patch (Closes: #929206).
+
+ -- Thomas Goirand <zigo@debian.org>  Tue, 14 Apr 2020 22:07:20 +0200
+
+lshw (02.18.85-0.3) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Upload to unstable
+  * Refresh FTCBFS patch to make it apply on the new release.
+
+  [ Helmut Grohne ]
+  * Non-maintainer upload.
+  * Fix FTCBFS: Closes: #839404.
+    + Pass triplet-prefixed CC and CXX to make.
+    + cross.patch: Make pkg-config substitutable.
+    + Use triplet-prefixed pkg-config.
+
+  [ Steve Langasek ]
+  * fix -version wrongly passed during build procedure (Closes: #849697)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 06 Jul 2019 14:36:53 +0200
+
+lshw (02.18.85-0.2) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/changelog: Remove trailing whitespaces
+  * d/rules: Remove trailing whitespaces
+  * d/control: Add Vcs-* field
+
+  [ Thomas Goirand ]
+  * Add patch: add-missing-ethlink-standards.patch, so that cards with newer
+    ethernet link types / speed are detected.
+
+ -- Thomas Goirand <zigo@debian.org>  Wed, 03 Jul 2019 11:15:12 +0200
+
+lshw (02.18.85-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload with prior agreement from maintainer.
+  * New upstream release (Closes: #903640).
+  * Rebased patches, and fix them for removing path to the src folder.
+  * Removed patches applied upstream:
+    - Avoid-crash-in-scan_dmi_sysfs-when-running-as-non-ro.patch
+    - alpha.patch
+    - fix-manpage.patch
+    - fix-width-handling.patch
+  * Add openstack-pkg-tools build-depends to manage upstream tarballs.
+  * Removed quilt from build depends, switch to format 3.0 (quilt).
+  * Ran wrap-and-sort -bast.
+  * Fixed debian/rules to stop using lshw-<version>/src folder, but just src.
+  * Add homepage field.
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 12 Jul 2018 15:02:49 +0200
+
+lshw (02.18-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload with permission of the maintainer.
+  * New upstream release.  Closes: #823639, #756921, #746616, #758550,
+    #767023.
+    - Refresh patches for unfortunate new upstream tarball layout.
+    - debian/patches/fat-inspection.patch, debian/patches/smbios-noscan.patch:
+      drop, fixed upstream.
+    - Drop debian/patches/sparc.patch: no longer applies cleanly, and is
+      incorrect (double header inclusion).
+  * debian/patches/Avoid-crash-in-scan_dmi_sysfs-when-running-as-non-ro.patch:
+    patch taken from Ubuntu to fix an upstream regression when running as
+    non-root; thanks to dann frazier <dann.frazier@canonical.com>
+  * debian/patches/fix-width-handling.patch: Fix regression in detecting
+    platform width.
+
+ -- Steve Langasek <vorlon@debian.org>  Mon, 15 Aug 2016 13:42:04 -0700
+
+lshw (02.17-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Disable the memory scanning for all architectures other
+    than i386 and x86_64. Patch from Leif Lindholm
+    <unixsmurf@gmail.com> (Closes: #740034)
+  * Prevent segfault if system has FAT partition(s) Patch from
+    Alban Browaeys <prahal@yahoo.com> (Closes: #757689)
+
+ -- Neil Williams <codehelp@debian.org>  Thu, 06 Nov 2014 12:16:13 +0000
+
+lshw (02.17-1) unstable; urgency=medium
+
+  [ Alex Henrie ]
+  * New upstream release
+  * SVG icon
+  * Changed desktop category from Settings to System
+
+ -- Ghe Rivero <ghe@debian.org>  Tue, 29 Jul 2014 12:20:05 +0200
+
+lshw (02.16-2.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Closes: #572098
+    - lshw-gtk.desktop requires su-to-root from the menu package
+
+ -- Alex Henrie <alexhenrie24@gmail.com>  Thu, 24 Jul 2014 22:39:07 +0200
+
+lshw (02.16-2) unstable; urgency=low
+
+  * Closes: #525217
+    - lshw: segfauls on armel (! /proc/efi/systab)
+  * Closes: #707152
+    - lshw can miscount cpus on devicetree platforms
+
+ -- Ghe Rivero <ghe@debian.org>  Thu, 27 Jun 2013 04:10:58 -0400
+
+lshw (02.16-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Ghe Rivero <ghe@debian.org>  Sat, 30 Jun 2012 10:15:18 +0200
+
+lshw (02.15-2) unstable; urgency=low
+
+  * Relaxed depends on pciutils and usbutils. Closes: #540119
+
+ -- Ghe Rivero <ghe.rivero@gmail.com>  Sun, 18 Dec 2011 13:26:10 +0100
+
+lshw (02.15-1) unstable; urgency=low
+
+  * [bbfc08f] Imported Upstream version 02.15
+  * [927e643] Updated debian/watch file
+  * [7ce089a] Clean some patches
+  * [2ef1ea7] Added libsqlite3-dev as build-depend
+  * [ea1f7f5] Bumped policy version
+  * [2254715] New upstream release fixed FTBFS gcc4.5 (Closes: #565031)
+  * [abac6bb] Added Spanish translation to .desktop.
+    Thanks to Javier Fernández-Sanguino Peña (JFS) (Closes: #537904)
+  * [ef94e6e] Added gksu launcher to .desktop.
+    Thanks to Javier Fernández-Sanguino Peña (JFS) (Closes: #537903)
+  * [ed92c99] Lintian clean again
+  * [5e64767] Fixed manpage
+
+ -- Ghe Rivero <ghe@debian.org>  Thu, 17 Feb 2011 10:10:08 +0100
+
+lshw (02.14-1) unstable; urgency=low
+
+  * New upstream release
+  * Some lintian clean
+  * Standars Version 3.8.2
+
+ -- Ghe Rivero <ghe@debian.org>  Sat, 25 Jul 2009 15:30:52 +0200
+
+lshw (02.13-2) unstable; urgency=low
+
+  * Added patch sparc: FTBFS in sparc arch. (Closes: #480628)
+
+ -- Ghe Rivero <ghe@debian.org>  Sun, 11 May 2008 16:09:55 +0200
+
+lshw (02.13-1) unstable; urgency=low
+
+  * New upstream release
+    - Fixe lshw: no output for memory (Closes: #456896)
+  * Migrated dpatch to quilt
+  * Clean lintian  (no more copyright-without-copyright-notice)
+
+ -- Ghe Rivero <ghe@debian.org>  Sat, 10 May 2008 15:36:31 +0200
+
+lshw (02.12.01-4) unstable; urgency=low
+
+  * DudesConf2 release
+  * Added patch 09-sysfs-hang
+  * Added patch 10-privacy
+
+ -- Ghe Rivero <ghe@debian.org>  Sat, 03 May 2008 12:37:32 +0200
+
+lshw (02.12.01-3) unstable; urgency=low
+
+  * Now really updated Debian-Policy Standards-Version to 3.7.3
+  * watch file working again. (Closes: #453535)
+  * lintian cleans:
+    - debian-rules-ignores-make-clean-error
+    - debian-rules-sets-DH_COMPAT
+    - dpatch-missing-description
+
+ -- Ghe Rivero <ghe@debian.org>  Sat,  2 Feb 2008 18:04:41 +0100
+
+lshw (02.12.01-2) unstable; urgency=low
+
+  * More fixes for gcc4.3. Closes: #462000
+  * Updated Debian-Policy Standards-Version to 3.7.3
+
+ -- Ghe Rivero <ghe@debian.org>  Wed, 23 Jan 2008 14:20:46 +0100
+
+lshw (02.12.01-1) unstable; urgency=low
+
+  * New upstream release
+  * More fixes for gcc4.3 (Ubuntu Patch). Closes: #441569
+  * Some Lintian cleans:
+      Remove homepage from page description
+  * Static man-page (no build-depends on docbook-utils)
+  * Moved icon menu to /usr/share/pixmaps
+  * Added /usr/share/pixmpas and /usr/share/applications to lshw-gtk.dir
+
+ -- Ghe Rivero <ghe@debian.org>  Wed, 26 Dec 2007 13:22:07 +0100
+
+lshw (02.11.01-2) unstable; urgency=low
+
+  * s/gtk-lshw/lshw-gtk/g Closes: #443771
+  * Some lintian cleans (new menu  Applications section)
+
+ -- Ghe Rivero <ghe@debian.org>  Mon,  8 Oct 2007 17:29:45 +0200
+
+lshw (02.11.01-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixed ftbfs with g++-4.3/gcc-snapshot (07-gcc43.dpath). Closes: #441569
+  * Explain why lshw -X fail in non X environment. Closes: #434644
+
+ -- Ghe Rivero <ghe@debian.org>  Wed, 12 Sep 2007 09:54:48 +0200
+
+lshw (02.10-4) unstable; urgency=low
+
+  * Added Upstream Homepage to package description. Closes: #426698
+  * Updated Debian-Policy Standards-Version to 3.7.2
+
+ -- Ghe Rivero <ghe@debian.org>  Wed, 30 May 2007 13:02:26 +0200
+
+lshw (02.10-3) unstable; urgency=low
+
+  * New URL at debian/copyright. Closes: #405452
+
+ -- Ghe Rivero <ghe@debian.org>  Mon, 28 May 2007 18:09:22 +0200
+
+lshw (02.10-2) unstable; urgency=low
+
+  * New upstream release. Closes: #413800
+  * New Maintainer mail address in control file
+
+ -- Ghe Rivero <ghe@debian.org>  Fri, 25 May 2007 11:02:42 +0200
+
+lshw (02.10-1) unstable; urgency=low
+
+  * New upstream release. Closes: #405452
+  * Remove lshw-common package. manuf.txt and oui.txt aren't used at all,
+      and we now depend on pciutils and usbutils for pci.ids and usb.ids
+      respectively (ubuntu patch)
+  * New URL at debian/copyright. Closes: #405452
+  * Fix FTBFS with GCC 4.3: missing #includes. Closes: #417381
+
+ -- Ghe Rivero <ghe@debian.org>  Thu, 03 May 2007 20:02:07 +0200
+
+lshw (02.08.01-1) unstable; urgency=low
+
+  * New upstream release. Closes: #360182
+  * Added AMD64 to the known platforms that works properly. Closes: #349619
+
+ -- Ghe Rivero <ghe@upsa.es>  Thu, 20 Jul 2006 00:35:07 +0200
+
+lshw (02.06-3) unstable; urgency=low
+
+  * "See you in GUA, Debconf-es2" Release
+  * Change CXX flags on alpha, so no more segfaults.
+  	Closes: #243752 and similar not reported to BTS.
+  * Small fix on code for alpha (dpatch 06-alpha)
+  * gxx transition
+  * Dedicated to Endesa to switch off the electricity from my university
+  	all the weekend :/
+  * Updated DH_COMPAT=4
+  * Removed ${shlibs:Depends} variable from lshw-common
+
+ -- Ghe Rivero <ghe@upsa.es>  Wed, 21 Dec 2005 16:58:49 +0100
+
+lshw (02.06-2) unstable; urgency=low
+
+  * Updated rules files. Copy logy.xpm instead of move it.
+
+ -- Ghe Rivero <ghe@upsa.es>  Mon, 17 Oct 2005 21:48:29 +0200
+
+lshw (02.06-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Ghe Rivero <ghe@upsa.es>  Sun, 16 Oct 2005 23:59:50 +0200
+
+lshw (02.05.01-3) unstable; urgency=low
+
+  * Removed spurious files from source.
+  * Make works with DEB_BUILD_OPTIONS.
+  * Now can be compiled twice or more.
+
+ -- Ghe Rivero <ghe@upsa.es>  Sun, 16 Oct 2005 23:11:27 +0200
+
+lshw (02.05.01-2) unstable; urgency=low
+
+  * New Free Software Foundation (FSF) address:
+    Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+    	Boston, MA 02110-1301, USA.
+
+ -- Ghe Rivero <ghe@upsa.es>  Tue, 27 Sep 2005 22:10:16 +0200
+
+lshw (02.05.01-1) unstable; urgency=low
+
+  * New upstream release
+  * Added manpage for lshw-gtk (lintian/linda clean)
+  * Upgraded to Debian Policy 3.6.2
+
+ -- Ghe Rivero <ghe@upsa.es>  Thu, 21 Jul 2005 23:42:52 +0200
+
+lshw (02.04-1) unstable; urgency=low
+
+  * New upstream release
+  * lshw-common is now arch independent, closes: #308473
+  * Added watch file
+  * Binaries moved to /usr/bin,
+    Added menu entry for lshw-gtk, closes: #303393
+
+ -- Ghe Rivero <ghe@upsa.es>  Sun, 17 Jul 2005 13:29:09 +0200
+
+lshw (02.03-2) unstable; urgency=low
+
+  * Build fix on AMD64, closes: #298029
+  * Build fix on no network machines, Depends on hwdata, closes: #300788
+  * Build Depends on dpatch
+
+ -- Ghe Rivero <ghe@upsa.es>  Wed, 23 Mar 2005 00:16:06 +0100
+
+lshw (02.03-1) unstable; urgency=low
+
+  * New upstream release
+  * Recommends pciutils and hwdata, closes: #191506
+
+ -- Ghe Rivero <ghe@upsa.es>  Sun,  6 Feb 2005 23:09:00 +0100
+
+lshw (02.00-1) unstable; urgency=low
+
+  * New upstream release, closes: #233038
+  * Updated standards version from 3.5.10 to 3.6.1
+  * New binary package: lshw-gtk, a GUI frontend
+  * New package: lshw-common, hw info files
+
+ -- Ghe Rivero <ghe@upsa.es>  Thu,  6 Jan 2005 23:01:14 +0100
+
+lshw (01.03-1) unstable; urgency=low
+
+  * New upstream release.
+    This release include SCSI support, closes: #182543.
+    Includes alpha support, closes: #183502.
+    It also fix html output, closes: #182826.
+  * Removed the manpage from debian dir because it is there in upstream
+    sources. This also means that the build dependency on perl is changed
+    to docbook-utils.
+  * Updated standards version from 3.5.8 to 3.5.10.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat, 30 Aug 2003 12:56:50 +0200
+
+lshw (0.06-2) unstable; urgency=low
+
+  * Fixed description, closes: #183321.
+
+ -- Ola Lundqvist <opal@debian.org>  Thu, 17 Apr 2003 22:36:19 +0200
+
+lshw (0.06-1) unstable; urgency=low
+
+  * Initial release, closes: #181106.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat, 15 Feb 2003 13:23:56 +0100

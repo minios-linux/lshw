@@ -1,0 +1,66 @@
+From: Helmut Grohne <helmut@subdivi.de>
+Subject: make pkg-config subtitutable
+
+--- lshw-02.18.85.orig/src/Makefile
++++ lshw-02.18.85/src/Makefile
+@@ -21,14 +21,15 @@
+ export ZLIB
+ 
+ CXX?=$(CROSS_COMPILE)c++
++PKG_CONFIG ?= pkg-config
+ INCLUDES=-I./core/
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\" -DVERSION=\"$(VERSION)\"
+ CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ ifeq ($(SQLITE), 1)
+-	CXXFLAGS+= -DSQLITE $(shell pkg-config --cflags sqlite3)
++	CXXFLAGS+= -DSQLITE $(shell $(PKG_CONFIG) --cflags sqlite3)
+ endif
+ ifeq ($(ZLIB), 1)
+-	CXXFLAGS+= -DZLIB $(shell pkg-config --cflags zlib)
++	CXXFLAGS+= -DZLIB $(shell $(PKG_CONFIG) --cflags zlib)
+ endif
+ LDFLAGS+=-L./core/
+ ifneq ($(shell $(LD) --help 2| grep -- --as-needed), )
+@@ -37,10 +38,10 @@
+ LDSTATIC=-static
+ LIBS+=-llshw -lresolv
+ ifeq ($(SQLITE), 1)
+-	LIBS+= $(shell pkg-config --libs sqlite3)
++	LIBS+= $(shell $(PKG_CONFIG) --libs sqlite3)
+ endif
+ ifeq ($(ZLIB), 1)
+-	LIBS+= $(shell pkg-config --libs zlib)
++	LIBS+= $(shell $(PKG_CONFIG) --libs zlib)
+ endif
+ 
+ export CXXFLAGS
+--- lshw-02.18.85.orig/src/gui/Makefile
++++ lshw-02.18.85/src/gui/Makefile
+@@ -1,22 +1,23 @@
+ PACKAGENAME?=lshw
+ 
+ CXX?=$(CROSS_COMPILE)c++
++PKG_CONFIG ?= pkg-config
+ CC?=$(CROSS_COMPILE)cc
+ STRIP?=strip
+ OBJCOPY?=objcopy
+ 
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
+-GTKINCLUDES=$(shell pkg-config gtk+-3.0 --cflags)
++GTKINCLUDES=$(shell $(PKG_CONFIG) gtk+-3.0 --cflags)
+ INCLUDES=-I../core $(GTKINCLUDES)
+ CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ ifeq ($(SQLITE), 1)
+-	CXXFLAGS+= -DSQLITE $(shell pkg-config --cflags sqlite3)
++	CXXFLAGS+= -DSQLITE $(shell $(PKG_CONFIG) --cflags sqlite3)
+ endif
+ CFLAGS=$(CXXFLAGS) -g $(DEFINES)
+-GTKLIBS=$(shell pkg-config gtk+-3.0 gmodule-2.0 --libs)
++GTKLIBS=$(shell $(PKG_CONFIG) gtk+-3.0 gmodule-2.0 --libs)
+ LIBS+=-L../core -llshw -lresolv $(GTKLIBS)
+ ifeq ($(SQLITE), 1)
+-	LIBS+= $(shell pkg-config --libs sqlite3)
++	LIBS+= $(shell $(PKG_CONFIG) --libs sqlite3)
+ endif
+ LDFLAGS=
+ ifneq ($(shell $(LD) --help 2| grep -- --as-needed), )

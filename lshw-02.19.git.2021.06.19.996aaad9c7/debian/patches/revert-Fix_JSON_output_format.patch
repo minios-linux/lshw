@@ -1,0 +1,62 @@
+Description: Revert upstream patch: Fix JSON output format. #28
+Author: Thomas Goirand <zigo@debian.org>
+Bug-Debian: https://bugs.debian.org/929206
+Forwarded: no
+Last-Update: 2020-04-14
+
+--- lshw-02.18.85.orig/src/core/hw.cc
++++ lshw-02.18.85/src/core/hw.cc
+@@ -1403,14 +1403,9 @@ string hwNode::asJSON(unsigned level)
+   config = getConfigKeys();
+   resources = getResources("\" value=\"");
+ 
+-  if (level == 0)
+-  {
+-    out << "[" << endl;
+-  }
+-
+   if(visible(getClassName()))
+   {
+-    out << spaces(2*level) << "{" << endl;
++    out << "{" << endl;
+     out << spaces(2*level+2) << "\"id\" : \"" << getId() << "\"," << endl;
+     out << spaces(2*level+2) << "\"class\" : \"" << getClassName() << "\"";
+ 
+@@ -1653,13 +1648,20 @@ string hwNode::asJSON(unsigned level)
+     resources.clear();
+   }
+ 
+-  for (unsigned int i = 0; i < countChildren(); i++)
++  
++  if(countChildren()>0)
+   {
+-    out << getChild(i)->asJSON(visible(getClassName()) ? level + 2 : 1);
+-    if (visible(getChild(i)->getClassName()))
++    if(visible(getClassName()))
++      out << "," << endl << spaces(2*level+2) << "\"children\" : [" << endl;
++
++    for (unsigned int i = 0; i < countChildren(); i++)
+     {
+-      out << "," << endl;
++      out << spaces(2*level+4) << getChild(i)->asJSON(visible(getClassName()) ? level + 2 : 1);
++      if(visible(getChild(i)->getClassName()) && (i < countChildren()-1)) out << "," << endl;
+     }
++
++    if(visible(getClassName()))
++      out << endl << spaces(2*level+2) << "]";
+   }
+ 
+   if(visible(getClassName()))
+@@ -1668,12 +1670,6 @@ string hwNode::asJSON(unsigned level)
+     out << "}";
+   }
+ 
+-  if (level == 0)
+-  {
+-    out.seekp(-2, std::ios_base::end);
+-    out << endl << "]" << endl;
+-  }
+-
+   return out.str();
+ }
+ 
